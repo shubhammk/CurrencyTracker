@@ -1,9 +1,13 @@
-ruby '2.1.2'
+ruby '2.3.3'
 
 source 'http://rubygems.org'
 
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.0'
 gem 'sqlite3'
+gem 'tzinfo-data'
+gem 'devise'
+gem 'tiddle'
+gem 'bcrypt', platforms: :ruby
 
 group :development do
   gem 'capybara'
