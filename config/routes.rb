@@ -2,8 +2,13 @@ CurrencyTracker::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "users/registrations", :sessions => "users/sessions"}
   root :to => "currencies#index"
   
+  match 'countries/visited_over_time' => 'countries#visited_over_time', :via => :get
+  match 'countries/visited_vs_notvisited' => 'countries#visited_vs_notvisited', :via => :get
+  match 'countries_with_max_currency_value' => 'countries#countries_with_max_currency_value', :via => :get
   resources :countries, :except => [:new, :destroy]
 
+  match 'currencies/collected_over_time' => 'currencies#collected_over_time', :via => :get
+  match 'currencies/collected_vs_notcollected' => 'currencies#collected_vs_notcollected', :via => :get
   resources :currencies, :only => [:index, :show]
 
   # The priority is based upon order of creation:

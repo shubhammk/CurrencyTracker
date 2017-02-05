@@ -1,11 +1,11 @@
 class CreateCountries < ActiveRecord::Migration
   def self.up
-    create_table :countries, :id => false do |t|
+    create_table :countries, { :id => false, :primary_key => :code } do |t|
       t.string :name
       t.string :code
 
       t.timestamps
-      t.primary_key :code
+      # t.primary_key :code
     end
   end
 

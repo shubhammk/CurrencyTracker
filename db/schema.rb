@@ -25,18 +25,20 @@ ActiveRecord::Schema.define(version: 20170202173620) do
 
   add_index "authentication_tokens", ["user_id"], name: "index_authentication_tokens_on_user_id"
 
-  create_table "countries", primary_key: "code", force: :cascade do |t|
-    t.string   "name",       limit: 255
+  create_table "countries", id: false, force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "visited",                default: false
+    t.boolean  "visited",    default: false
   end
 
-  create_table "currencies", primary_key: "code", force: :cascade do |t|
-    t.string   "name",            limit: 255
+  create_table "currencies", id: false, force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "country_id",      limit: 255
+    t.string   "country_id"
     t.decimal  "weight"
     t.decimal  "collector_value"
   end
