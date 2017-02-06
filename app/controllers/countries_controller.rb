@@ -107,11 +107,44 @@ class CountriesController < ApplicationController
     end
   end
 
-  # TO-DO
+  # Params: weight - Return list of countries with maximum collector values
   def countries_with_max_currency_value
-    currency = Currency.pluck(:code, :country_id, :weight, :collector_value);
+    given_weight = params[:weight].to_i
+    currency = Currency.all.to_a;
+    max_values = Array.new(given_weight + 1, 0)
+    list_of_countries_idx = Array.new(given_weight + 1) { Array.new }
+    num_of_values = currency.size
+    
+    for i in 0..given_weight
+      beatenIndex = -1
+      bestPrevIndex = -1
+      for j in 0..num_of_values-1
+        if (currency[j].weight < i)
+          if (max_values[i] < max_values[i-currency[j].weight] + currency[j].collector_value)
+            max_values[i] = max_values[i-currency[j].weight] + currency[j].collector_value
+            beatenIndex = j
+            bestPrevIndex = i-currency[j].weight.to_i
+          end
+        end
+      end
+      list_of_countries_idx[i].push(beatenIndex)
+      list_of_countries_idx[i].push(bestPrevIndex)
+    end
+
+    last_index = given_weight
+    currencies = Array.new
+    while last_index > 0
+      currencies.push(list_of_countries_idx[last_index][0]) if list_of_countries_idx[last_index][0] > 0
+      last_index = list_of_countries_idx[last_index][1]
+    end
+    
+    countries = Array.new
+    currencies.each do |currency_idx|
+      countries.push(currency[currency_idx].country.name)
+    end
+
     respond_to do |format|
-        format.json { render :json => currency.as_json }
+        format.json { render :json => countries.as_json }
     end
   end
 

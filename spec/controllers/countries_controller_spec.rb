@@ -69,13 +69,21 @@ describe CountriesController do
       expect(response).to be_success
     end
 
-    it "should GET currencies visited vs not_visited" do
+    it "should GET countries visited vs not_visited" do
       sign_in
       request.accept = "application/json"
       get :visited_vs_notvisited
       expect(response).to be_success
       parsed_body = JSON.parse(response.body)
       expect(parsed_body["not_visited"]).to eq(244)
+    end
+
+    it "should GET countries with max currency value" do
+      sign_in
+      request.accept = "application/json"
+      get :countries_with_max_currency_value, :weight => 2
+      expect(response).to be_success
+      puts "#{response.body}"
     end
   
   end

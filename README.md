@@ -24,7 +24,7 @@ rake db:seed
 ```
 
 APIs
-====
+----
 As explained above, there are two resources which can be accessed from the application - 'Countries' and 'Currencies'.
 - Countries:
 ------------
@@ -151,6 +151,11 @@ Example Response:
   "collected": 0,
   "not_collected": 4
 }
+
+- 'Countries with maximum Currency value'
+GET 'http://localhost:3000/countries_with_max_currency_value?weight=16'
+Given the weight allowed, list of countries which gives maximum collector value can be
+retrieved.
 
 
 Testing
