@@ -153,9 +153,14 @@ Example Response:
 }
 
 - 'Countries with maximum Currency value'
-GET 'http://localhost:3000/countries_with_max_currency_value?weight=16'
+GET 'http://localhost:3000/countries_with_max_currency_value?weight=10'
 Given the weight allowed, list of countries which gives maximum collector value can be
 retrieved.
+Example Response:
+[
+  "Country B",
+  "Country B"
+]
 
 
 Testing
